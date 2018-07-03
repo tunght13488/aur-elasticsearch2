@@ -1,28 +1,28 @@
 [Unit]
-Description=Elasticsearch
+Description=Elasticsearch 2
 Documentation=http://www.elastic.co
 Wants=network.target
 After=network.target
 
 [Service]
 Type=forking
-RuntimeDirectory=elasticsearch
-PIDFile=/run/elasticsearch/elasticsearch.pid
+RuntimeDirectory=elasticsearch2
+PIDFile=/run/elasticsearch2/%I.pid
 
 Environment=JAVA_HOME=/usr/lib/jvm/default-runtime
-Environment=ES_HOME=/usr/share/elasticsearch
-Environment=CONF_DIR=/etc/elasticsearch
-Environment=DATA_DIR=/var/lib/elasticsearch
-Environment=LOG_DIR=/var/log/elasticsearch
-EnvironmentFile=-/etc/default/elasticsearch
+Environment=ES_HOME=/usr/share/elasticsearch2
+Environment=CONF_DIR=/etc/elasticsearch2/%I
+Environment=DATA_DIR=/var/lib/elasticsearch2/%I
+Environment=LOG_DIR=/var/log/elasticsearch2
+EnvironmentFile=-/etc/default/elasticsearch2
 
-WorkingDirectory=/usr/share/elasticsearch
+WorkingDirectory=/usr/share/elasticsearch2
 
 User=elasticsearch
 Group=elasticsearch
 
-ExecStart=/usr/bin/elasticsearch -d \
-            -p /run/elasticsearch/elasticsearch.pid \
+ExecStart=/usr/bin/elasticsearch2 -d \
+            -p /run/elasticsearch2/%I.pid \
             -Des.default.path.home=${ES_HOME} \
             -Des.default.path.logs=${LOG_DIR} \
             -Des.default.path.data=${DATA_DIR} \
